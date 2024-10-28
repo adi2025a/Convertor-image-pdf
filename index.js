@@ -34,6 +34,14 @@ app.get("/pdftoimage", (req, res) => {
   res.render(path.join(__dirname, "views/pdfToImages.ejs"));
 });
 
+app.get("/about", (req, res) => {
+  res.render(path.join(__dirname, "views/about.ejs"));
+});
+
+app.get("/contact", (req, res) => {
+  res.render(path.join(__dirname, "views/contact.ejs"));
+});
+
 const upload=uploadImages();
 
 app.post("/uploadPhotos", upload.array("images", 5), (req, res) => {

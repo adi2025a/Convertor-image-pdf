@@ -7,6 +7,7 @@ body{
     width: 100vw;
     height: 100vh;
     background-image: url(assets/bg1.png);
+    background-attachment: fixed;
 }
 
 header{
@@ -23,6 +24,10 @@ header{
     align-items: center;
     gap: 20px;
     box-shadow: white 0px 0px 2px;
+}
+
+body::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar */
 }
 
 .navbtns{
@@ -42,7 +47,7 @@ header{
 .main{
     display: flex;
     width: 100vw;
-    height:40vh;
+    height:60vh;
     justify-content: center;
     align-items: center;
 }
@@ -88,4 +93,18 @@ header{
 
 #inputPhotos{
     display:none;
+}
+
+.heading1{
+    font-size: 60px;
+    font-family: 'Times New Roman', Times, serif;
+    color:rgba(148, 187, 255, 0.564); 
+    margin: 25px;
+}
+
+.heading2{
+    font-size: 45px;
+    font-family: 'Times New Roman', Times, serif;
+    color:rgba(148, 187, 255, 0.564); 
+    margin: 25px;
 }
