@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Images to PDF</title>
+    <title>Download PDF</title>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
     <%- include('partials/header.ejs') %>
     <div class="main">
         <h1 class="heading">Images to PDF</h1>
-        <form action="/uploadPhotos" method="POST" enctype="multipart/form-data" >
-            <label class="btns2" for="inputPhotos">Choose Photo</label>
-            <input id="inputPhotos" type="file" id="fileUpload" name="images" multiple>
-            <button class="btns2" type="submit">Upload</button>
-          </form>
+        <button class="btns2">Download PDF</button>
           
     </div>
     <script src="app.js"></script>
