@@ -1,8 +1,12 @@
 import express from "express";
 import bodyParser from "body-parser";
 import path from "path";
+import fs from 'fs';
 import { fileURLToPath } from "url";
 import {uploadImages} from './operations/downloadPdf.js';
+import { directoryToImageArray } from "./operations/downloadPdf.js";
+import { imagesToPdf } from "./operations/downloadPdf.js";
+import { uploadFolderName } from "./operations/downloadPdf.js";
 
 const PORT = 3000;
 const app = express();
@@ -40,6 +44,28 @@ app.post("/uploadPhotos", upload.array("images", 5), (req, res) => {
     res.status(400).send(err.message);
   }
 });
+
+
+app.get('/downloadPdf',async (req,res)=>{
+    const directoryPath= path.join(__dirname,`uploads/${uploadFolderName}`);
+    const images = await directoryToImageArray(directoryPath);
+
+
+    const outputFolder = path.join(__dirname,`output/YourPdf${uploadFolderName}.pdf`)
+    
+
+    await imagesToPdf(images,outputFolder);
+
+
+    res.download(outputFolder, `YourPdf${uploadFolderName}.pdf`, (err) => {
+        if (err) {
+          console.error('Error downloading file:', err);
+          res.status(500).send('Error downloading file');
+        } else {
+          console.log('File downloaded successfully');
+        }
+      });
+})
 
 //PORT
 app.listen(PORT, () => {
