@@ -108,3 +108,7 @@ body::-webkit-scrollbar {
     color:rgba(148, 187, 255, 0.564); 
     margin: 25px;
 }
+
+#inputPdf{
+    display: none;
+}
