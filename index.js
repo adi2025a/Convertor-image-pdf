@@ -3,10 +3,11 @@ import bodyParser from "body-parser";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
-import { uploadImages } from "./operations/downloadPdf.js";
-import { directoryToImageArray } from "./operations/downloadPdf.js";
-import { imagesToPdf } from "./operations/downloadPdf.js";
-import { uploadFolderName } from "./operations/downloadPdf.js";
+import { uploadImages,
+  directoryToImageArray,
+  imagesToPdf,
+  uploadFolderName
+ } from "./operations/downloadPdf.js";
 
 const PORT = 3000;
 const app = express();
@@ -31,8 +32,8 @@ app.get("/imagetopdf", (req, res) => {
   
 });
 
-app.get("/pdftoimage", (req, res) => {
-  res.render(path.join(__dirname, "views/pdfToImages.ejs"));
+app.get("/texttopdf", (req, res) => {
+  res.render(path.join(__dirname, "views/textToPdf.ejs"));
 });
 
 app.get("/about", (req, res) => {
