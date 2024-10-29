@@ -1,9 +1,9 @@
 import express from "express";
 import bodyParser from "body-parser";
 import path from "path";
-import fs from 'fs';
+import fs from "fs";
 import { fileURLToPath } from "url";
-import {uploadImages} from './operations/downloadPdf.js';
+import { uploadImages } from "./operations/downloadPdf.js";
 import { directoryToImageArray } from "./operations/downloadPdf.js";
 import { imagesToPdf } from "./operations/downloadPdf.js";
 import { uploadFolderName } from "./operations/downloadPdf.js";
@@ -28,6 +28,7 @@ app.get("/", (req, res) => {
 
 app.get("/imagetopdf", (req, res) => {
   res.render(path.join(__dirname, "views/imagesToPdf.ejs"));
+  
 });
 
 app.get("/pdftoimage", (req, res) => {
@@ -42,11 +43,10 @@ app.get("/contact", (req, res) => {
   res.render(path.join(__dirname, "views/contact.ejs"));
 });
 
-const upload=uploadImages();
 
+const upload = uploadImages();
 app.post("/uploadPhotos", upload.array("images", 5), (req, res) => {
   try {
-   
     res.render("downloadPdf.ejs");
   } catch (err) {
     res.status(400).send(err.message);
@@ -54,26 +54,26 @@ app.post("/uploadPhotos", upload.array("images", 5), (req, res) => {
 });
 
 
-app.get('/downloadPdf',async (req,res)=>{
-    const directoryPath= path.join(__dirname,`uploads/${uploadFolderName}`);
-    const images = await directoryToImageArray(directoryPath);
+app.get("/downloadPdf", async (req, res) => {
+  const directoryPath = path.join(__dirname, `uploads/${uploadFolderName}`);
+  const images = await directoryToImageArray(directoryPath);
 
+  const outputFolder = path.join(
+    __dirname,
+    `output/YourPdf${uploadFolderName}.pdf`
+  );
 
-    const outputFolder = path.join(__dirname,`output/YourPdf${uploadFolderName}.pdf`)
-    
+  await imagesToPdf(images, outputFolder);
 
-    await imagesToPdf(images,outputFolder);
-
-
-    res.download(outputFolder, `YourPdf${uploadFolderName}.pdf`, (err) => {
-        if (err) {
-          console.error('Error downloading file:', err);
-          res.status(500).send('Error downloading file');
-        } else {
-          console.log('File downloaded successfully');
-        }
-      });
-})
+  res.download(outputFolder, `YourPdf${uploadFolderName}.pdf`, (err) => {
+    if (err) {
+      console.error("Error downloading file:", err);
+      res.status(500).send("Error downloading file");
+    } else {
+      console.log("File downloaded successfully");
+    }
+  });
+});
 
 //PORT
 app.listen(PORT, () => {

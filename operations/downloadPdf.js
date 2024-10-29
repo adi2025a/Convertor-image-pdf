@@ -3,7 +3,6 @@ import { fileURLToPath } from "url";
 import multer from "multer";
 import fs from "fs";
 import PDFDocument from "pdfkit";
-import { rejects } from "assert";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
