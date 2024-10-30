@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF to Images</title>
-    <link rel="stylesheet" href="main.css">
-</head>
-<body>
-    <%- include('partials/header.ejs') %>
-    <div class="main">
-        <h1 class="heading">Text to PDF</h1>
-        
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text to PDF</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <form class="mainContainer" action="uploadText">
+    <div id="document">
+      <textarea name="text1" id="textArea" class="textInput"></textarea>
     </div>
+        <img src="assets/plus2.png" alt="" width="50px" class="btns2" id="nextPage">
+        <button type="submit" class="btns2">Submit</button>
+    </form>
     <script src="app.js"></script>
-</body>
+  </body>
 </html>
