@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <form class="mainContainer" action="uploadText">
+    <%- include('partials/header.ejs') %>
+    <form class="mainContainer" action="/uploadtext" method="post">
     <div id="document">
-      <textarea name="text1" id="textArea" class="textInput"></textarea>
+      <textarea name="textarea" class="textInput"></textarea>
     </div>
-        <img src="assets/plus2.png" alt="" width="50px" class="btns2" id="nextPage">
-        <button type="submit" class="btns2">Submit</button>
+        <button type="submit" class="btns2">Download</button>
     </form>
     <script src="app.js"></script>
   </body>

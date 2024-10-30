@@ -3,11 +3,13 @@ import bodyParser from "body-parser";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
-import { uploadImages,
+import {
+  uploadImages,
   directoryToImageArray,
   imagesToPdf,
-  uploadFolderName
- } from "./operations/downloadPdf.js";
+  uploadFolderName,
+} from "./operations/downloadPdf.js";
+import { createDocument, pdfIdentifier } from "./operations/textToPdf.js";
 
 const PORT = 3000;
 const app = express();
@@ -29,7 +31,6 @@ app.get("/", (req, res) => {
 
 app.get("/imagetopdf", (req, res) => {
   res.render(path.join(__dirname, "views/imagesToPdf.ejs"));
-  
 });
 
 app.get("/texttopdf", (req, res) => {
@@ -44,7 +45,6 @@ app.get("/contact", (req, res) => {
   res.render(path.join(__dirname, "views/contact.ejs"));
 });
 
-
 const upload = uploadImages();
 app.post("/uploadPhotos", upload.array("images", 5), (req, res) => {
   try {
@@ -53,7 +53,6 @@ app.post("/uploadPhotos", upload.array("images", 5), (req, res) => {
     res.status(400).send(err.message);
   }
 });
-
 
 app.get("/downloadPdf", async (req, res) => {
   const directoryPath = path.join(__dirname, `uploads/${uploadFolderName}`);
@@ -74,6 +73,18 @@ app.get("/downloadPdf", async (req, res) => {
       console.log("File downloaded successfully");
     }
   });
+});
+
+//Text upload
+app.post("/uploadtext",async (req, res) => {
+    const textarea = req.body.textarea;
+    await createDocument(textarea);
+    try {
+      res.download(`output/${pdfIdentifier}.pdf`);
+    } catch (error) {
+      console.log(error);
+    }
+    
 });
 
 //PORT
